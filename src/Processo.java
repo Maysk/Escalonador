@@ -128,6 +128,8 @@ public class Processo implements Comparable{
             retorno = 0;
         else
             retorno = this.prioridade - outro.prioridade;
+        if(retorno == 0)
+            retorno = this.getId() - outro.getId();
         return retorno;
     }
     public int mandaParaCPU(int tempoCorrente,int quantidadeTempo){ //Atualiza dados do processo e retorna tempo não usado em CPU caso quantidadeTempo seja > que burstTimeRestante
