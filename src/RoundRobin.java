@@ -12,17 +12,15 @@ public class RoundRobin extends StrategyEscalonador{
         processosEstadoPronto = new TreeSet<>();
         this.timeQuantum = timeQuantum;
         this.processos = processos;
-        int ordem = 0;
         for(Processo processo : processos){
-            processo.setPrioridade(ordem);
+            processo.setPrioridade(processo.getTempoChegada());
             processosEstadoPronto.add(processo);
-            ordem++;
         }
         tempoCorrente = 0;
     }
     public ArrayList<Execucao> escalonar(){
         ArrayList<Execucao> historico = new ArrayList<>();
-        int contadorPrioridade  = processosEstadoPronto.size() + 1;
+        int contadorPrioridade  = processosEstadoPronto.last().getPrioridade() + 1;
         while(!processosEstadoPronto.isEmpty()){
             processoCorrente = processosEstadoPronto.pollFirst();
             int tempoNaoUsado = processoCorrente.mandaParaCPU(tempoCorrente, timeQuantum);
