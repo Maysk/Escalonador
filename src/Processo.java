@@ -19,7 +19,7 @@ public class Processo implements Comparable{
         this.burstTime = burstTime;
         this.tempoChegada = tempoChegada;
         this.prioridade = prioridade;
-        turnAround = Integer.MAX_VALUE;
+        turnAround = 0;
         tempoEspera = 0;
         tempoResposta = Integer.MAX_VALUE;
         burstTimeRestante = burstTime;
@@ -148,7 +148,7 @@ public class Processo implements Comparable{
         
         if(burstTimeRestante <= 0){
             burstTimeRestante = 0;
-            turnAround = tempoCorrente + quantidadeTempo - tempoNaoUsado;
+            turnAround = tempoCorrente + quantidadeTempo - tempoNaoUsado - tempoChegada;
             esperandoDesde = turnAround;
         }
         return tempoNaoUsado;
