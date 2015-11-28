@@ -3,22 +3,21 @@ import java.util.TreeSet;
 
 
 public class Priority extends StrategyEscalonador{
-	ListaDeProcessos lProcess;
+	
 	Priority(ArrayList<Processo> processos){
-		lProcess = new ListaDeProcessos();
+		processosEstadoPronto = new TreeSet<Processo>(); 
 		this.processos = processos;
 		for(Processo processo : processos){
-			lProcess.addProcess(processo);
+			processosEstadoPronto.add(processo);
 		}
-		tempoCorrente = lProcess.getMenorTempoDeChegada();
+		tempoCorrente = getMenorTempoDeChegada();
 	}
 	
 	@Override
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
-		
-		while(!lProcess.isEmpty()){
-            processoCorrente = lProcess.pollProcessoComMenorTempoDeChegada();
+		while(!processosEstadoPronto.isEmpty()){
+            processoCorrente = pollProcessoComMenorTempoDeChegada();
             int tempoNaoUsado = processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());
             int tempoFinal = tempoCorrente + processoCorrente.getBurstTime() - tempoNaoUsado;
             Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
@@ -28,5 +27,30 @@ public class Priority extends StrategyEscalonador{
 		
 		return historico;
 	}
+	
+	private int getMenorTempoDeChegada(){
+		int menorTempoDeChegada = Integer.MAX_VALUE;
+		for(Processo p : processosEstadoPronto){
+			if(p.getTempoChegada() < menorTempoDeChegada ){
+				menorTempoDeChegada = p.getTempoChegada();
+			}
+		}
+		
+		return menorTempoDeChegada;	
+	}
+	
+	private Processo pollProcessoComMenorTempoDeChegada(){
+		Processo processoEscolhido = processosEstadoPronto.last();
+		for(Processo p : processosEstadoPronto){
+			if(p.getTempoChegada() < processoEscolhido.getTempoChegada()){
+				processoEscolhido = p;
+			}
+		}
+		processosEstadoPronto.remove(processoEscolhido);
+		return processoEscolhido;
+	}
+
+	
+	
 
 }

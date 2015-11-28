@@ -138,8 +138,16 @@ public class Processo implements Comparable{
             return quantidadeTempo;
         if(burstTime == burstTimeRestante)//primeira execuão
             tempoResposta = tempoCorrente - tempoChegada;
+        	if(tempoResposta<0){
+        		tempoResposta = 0;
+        	}
+        
         tempoEspera += tempoCorrente - esperandoDesde;
         esperandoDesde = tempoCorrente + quantidadeTempo;
+        
+        if(tempoEspera<0){
+        	tempoEspera = 0;
+        }
         
         if(quantidadeTempo > burstTimeRestante){
             tempoNaoUsado = quantidadeTempo - burstTimeRestante;
