@@ -5,7 +5,7 @@
 public class Processo implements Comparable{
     private int id;//Indetificador do processo;
     private int burstTime;//Quantidade de tempo de processamento inteiro do processo;
-    private int tempoChegada;//tempo de chegada do processo relativo ao processo P0=0;
+    private int tempoChegada;//tempo de chegada do processo ;
     private int prioridade; // Ordenador do processo;
     private int turnAround;// Tempo do início ao fim do processo
     private int tempoEspera;//Tempo que o processo passou na fila de prontos + fila de espera
