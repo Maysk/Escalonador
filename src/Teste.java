@@ -13,7 +13,8 @@ import java.util.ArrayList;
  */
 public class Teste {
     public static void main(String args[]){
-        Processo p1 = new Processo(1, 24, 11, 0);
+        /*
+    	Processo p1 = new Processo(1, 24, 11, 0);
         Processo p2 = new Processo(2, 3, 10, 0);
         Processo p3 = new Processo(3, 3, 28, 0);
         ArrayList<Processo> processos = new ArrayList<>();
@@ -40,8 +41,24 @@ public class Teste {
         System.out.println("\n\nRR:");
         showProcessos(processos2);
         show(escalonamento2);
+        */
+    	
+    	Processo processo1 = new Processo(1, 24, 10, 0);
+        Processo processo2 = new Processo(2, 3, 10, 1);
+        Processo processo3 = new Processo(3, 3, 28, 0);
+        ArrayList<Processo> processos3 = new ArrayList<>();
+        processos3.add(processo1);
+        processos3.add(processo2);
+        processos3.add(processo3);
+        StrategyEscalonador priority = new Priority(processos3);
+        ArrayList<Execucao> escalonamento3 = priority.escalonar();
+        System.out.println("Priority:");
+        showProcessos(processos3);
+        show(escalonamento3);
         
     }
+    
+    
     public static void show(ArrayList<Execucao> escalonamento){
         for(Execucao e : escalonamento)
             System.out.println(e);

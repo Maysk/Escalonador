@@ -3,28 +3,28 @@ import java.util.TreeSet;
 
 
 public class Priority extends StrategyEscalonador{
-	
+	ListaDeProcessos lProcess;
 	Priority(ArrayList<Processo> processos){
-		processosEstadoPronto = new TreeSet<Processo>();
+		lProcess = new ListaDeProcessos();
 		this.processos = processos;
 		for(Processo processo : processos){
-			processosEstadoPronto.add(processo);
+			lProcess.addProcess(processo);
 		}
-		tempoCorrente = 0;
+		tempoCorrente = lProcess.getMenorTempoDeChegada();
 	}
 	
 	@Override
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
-		while(!processosEstadoPronto.isEmpty()){
-            processoCorrente = processosEstadoPronto.pollFirst();
+		
+		while(!lProcess.isEmpty()){
+            processoCorrente = lProcess.pollProcessoComMenorTempoDeChegada();
             int tempoNaoUsado = processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());
             int tempoFinal = tempoCorrente + processoCorrente.getBurstTime() - tempoNaoUsado;
             Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
             historico.add(execucaoCorrente);
             tempoCorrente = tempoFinal;                
         }
-		
 		
 		return historico;
 	}
