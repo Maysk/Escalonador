@@ -23,6 +23,18 @@ public class RoundRobin extends StrategyEscalonador{
         int contadorPrioridade  = processosEstadoPronto.last().getPrioridade() + 1;
         while(!processosEstadoPronto.isEmpty()){
             processoCorrente = processosEstadoPronto.pollFirst();
+            
+            while(processoCorrente.getTempoChegada() > tempoCorrente){
+                if(processosEstadoPronto.isEmpty()){
+                    tempoCorrente = processoCorrente.getTempoChegada();
+                }else{
+                    processoCorrente.setPrioridade(contadorPrioridade);
+                    processosEstadoPronto.add(processoCorrente);
+                    contadorPrioridade++;
+                    processoCorrente = processosEstadoPronto.pollFirst();
+                }
+            }
+            
             int tempoNaoUsado = processoCorrente.mandaParaCPU(tempoCorrente, timeQuantum);
             int tempoFinal = tempoCorrente + timeQuantum - tempoNaoUsado;
             Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
