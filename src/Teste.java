@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Teste {
     public static void main(String args[]){
-        Processo p1 = new Processo(1, 24, 0, 0);
-        Processo p2 = new Processo(2, 3, 90, 0);
+        Processo p1 = new Processo(1, 24, 11, 0);
+        Processo p2 = new Processo(2, 3, 10, 0);
         Processo p3 = new Processo(3, 3, 28, 0);
         ArrayList<Processo> processos = new ArrayList<>();
         processos.add(p1);
@@ -26,7 +26,7 @@ public class Teste {
         showProcessos(processos);
         show(escalonamento);
         
-        Processo p4 = new Processo(1, 53, 0, 0);
+        Processo p4 = new Processo(1, 53, 22, 0);
         Processo p5 = new Processo(2, 17, 271, 0);
         Processo p6 = new Processo(3, 68, 21, 0);
         Processo p7 = new Processo(4, 24, 21, 0);
