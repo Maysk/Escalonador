@@ -55,7 +55,7 @@ public class Teste {
         System.out.println("Priority:");
         showProcessos(processos3);
         show(escalonamento3);
-        */
+        
     	
 
     	Processo processo1 = new Processo(1, 3, 0, 1);
@@ -70,6 +70,31 @@ public class Teste {
         System.out.println("PriorityP:");
         showProcessos(processos4);
         show(escalonamento4);
+        */
+        
+    
+        //Testes SJF:
+        //Processo(ID,burstTime,TempoChegada,prioridade)
+        Processo processo1 = new Processo(1, 7, 0, 1);
+        Processo processo2 = new Processo(2, 4, 2, 2);
+        Processo processo3 = new Processo(3, 1, 4, 3);
+        Processo processo4 = new Processo(4, 4, 5, 3);
+        
+        Processo processo1_ = new Processo(1, 2, 0, 1);
+        Processo processo2_ = new Processo(2, 4, 4, 2);
+        Processo processo3_ = new Processo(3, 8, 5, 3);
+        Processo processo4_ = new Processo(4, 5, 5, 3);
+        ArrayList<Processo> listaProcessos = new ArrayList<>();
+        listaProcessos.add(processo1_);
+        listaProcessos.add(processo2_);
+        listaProcessos.add(processo3_);
+        listaProcessos.add(processo4_);
+        StrategyEscalonador sjf = new ShortestJobFirst(listaProcessos);
+        ArrayList<Execucao> escalonamentoSJT = sjf.escalonar();
+        System.out.println("ShortestJobFirst:");
+        showProcessos(listaProcessos);
+        show(escalonamentoSJT);
+        
     }
     
     
