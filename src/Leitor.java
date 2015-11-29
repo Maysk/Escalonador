@@ -9,35 +9,28 @@ public class Leitor {
 	} 
 	
 	public ArrayList<Processo> readFile() throws FileNotFoundException, IOException {
-		ArrayList<Processo> processos = new ArrayList<Processo>();
-		
+		ArrayList<Processo> processos = new ArrayList<Processo>();	
 		FileReader fr = new FileReader(this.path);
 		BufferedReader buff = new BufferedReader(fr);
 		
 		String line;
 		String splitedLine[];
-		
-		while((line = buff.readLine()) != null){
+		while((line = buff.readLine()) != null){			
 			splitedLine = line.split(",");
 			processos.add(convertToProcess(splitedLine));
 		}
-		return processos;
-					
+		
+		return processos;			
 	}
 
-	private Processo convertToProcess(String[] s){
-		Processo p = new Processo();
-		try{
-			p.setTempoChegada(Integer.parseInt(s[0]));
-			p.setId(Integer.parseInt(s[1]));
-			p.setBurstTime(Integer.parseInt(s[2]));
-			p.setPrioridade(Integer.parseInt(s[3]));
-			return p;
-		}catch(ArrayIndexOutOfBoundsException e){
-			System.out.print("\nProvavelmente alguma linha do arquivo de entrada não está de acordo com o padrão...");
-		}
+	private Processo convertToProcess(String[] s) throws ArrayIndexOutOfBoundsException, NumberFormatException{
+		Processo p;
+		int id = Integer.parseInt(s[1].trim());
+		int burstTime = Integer.parseInt(s[2].trim());
+		int tempoChegada = Integer.parseInt(s[0].trim());
+		int prioridade = Integer.parseInt(s[3].trim());
+		p = new Processo(id, burstTime, tempoChegada, prioridade);
 		return p;
-		
 	}
 	
 }
