@@ -18,8 +18,8 @@ public class Priority extends StrategyEscalonador{
 		ArrayList<Execucao> historico = new ArrayList<>();
 		while(!processosEstadoPronto.isEmpty()){
             processoCorrente = pollProcessoComMenorTempoDeChegada();
-            int tempoNaoUsado = processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());
-            int tempoFinal = tempoCorrente + processoCorrente.getBurstTime() - tempoNaoUsado;
+            processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());
+            int tempoFinal = tempoCorrente + processoCorrente.getBurstTime();
             Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
             historico.add(execucaoCorrente);
             tempoCorrente = tempoFinal;                
