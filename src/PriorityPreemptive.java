@@ -22,15 +22,20 @@ public class PriorityPreemptive extends StrategyEscalonador{
 			if(processoCorrente == null){
 				processoCorrente = pollProcessoDisponivelComMaiorPrioridade();
 			}
+			
+			if(processoCorrente.getTempoChegada() > tempoCorrente){
+                tempoCorrente = processoCorrente.getTempoChegada();
+            }
+			
 			int tempoFinal = tempoCorrente + processoCorrente.getBurstTimeRestante();
 			Processo processoCandidato = processoFalso;
 			for (Processo a : processosEstadoPronto){
-				if( a.getPrioridade() > processoCandidato.getPrioridade() && a.getTempoChegada() < processoCandidato.getTempoChegada() && (a.getTempoChegada() + tempoCorrente)  <= tempoFinal && a.getPrioridade() > processoCorrente.getPrioridade() ){
+				if(a.getPrioridade() > processoCorrente.getPrioridade() && a.getTempoChegada() <= tempoFinal && a.getPrioridade() >= processoCandidato.getPrioridade() && a.getTempoChegada() < processoCandidato.getTempoChegada()){
 					processoCandidato = a;
 				}           	
 			}
         
-			if(processoCandidato.getPrioridade() <= processoCorrente.getPrioridade() || (processoCandidato.getTempoChegada() + tempoCorrente)  > tempoFinal){
+			if(processoCandidato.getPrioridade() <= processoCorrente.getPrioridade() || processoCandidato.getTempoChegada()  > tempoFinal){
 				processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());            
 				Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
 				historico.add(execucaoCorrente);
@@ -38,7 +43,13 @@ public class PriorityPreemptive extends StrategyEscalonador{
 				processoCorrente = null;
 			}
 			else{
-				int quantidadeDeTempo = processoCandidato.getTempoChegada() - processoCorrente.getTempoChegada(); 
+				int quantidadeDeTempo; 
+				if(processoCorrente.getTempoChegada() == tempoCorrente){
+					quantidadeDeTempo = processoCandidato.getTempoChegada() - processoCorrente.getTempoChegada();
+				}
+				else{
+					quantidadeDeTempo = processoCandidato.getTempoChegada() - processoCorrente.getTempoChegada() - tempoCorrente;
+				}
 				tempoFinal = tempoCorrente + quantidadeDeTempo;
 				processoCorrente.mandaParaCPU(tempoCorrente, quantidadeDeTempo);
 				Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
@@ -67,10 +78,14 @@ public class PriorityPreemptive extends StrategyEscalonador{
 	
 	private Processo pollProcessoDisponivelComMaiorPrioridade(){
 		Processo processoEscolhido = processosEstadoPronto.first();
+		boolean condicao1, condicao2;
 		for(Processo p : processosEstadoPronto){
-			if(p.getPrioridade() > processoEscolhido.getPrioridade() && p.getTempoChegada() < tempoCorrente){
+			condicao1 = p.getPrioridade() > processoEscolhido.getPrioridade() && p.getTempoChegada() <= tempoCorrente;
+			condicao2 = p.getPrioridade() == processoEscolhido.getPrioridade() && p.getTempoChegada() < processoEscolhido.getTempoChegada() && p.getTempoChegada() < tempoCorrente ;	
+			if(condicao1 || condicao2){
 				processoEscolhido = p;
 			}
+		
 		}
 		processosEstadoPronto.remove(processoEscolhido);
 		return processoEscolhido;
