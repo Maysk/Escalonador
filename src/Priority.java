@@ -17,7 +17,12 @@ public class Priority extends StrategyEscalonador{
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
 		while(!processosEstadoPronto.isEmpty()){
-            processoCorrente = pollProcessoComMenorTempoDeChegada();
+            processoCorrente = pollProcessoDisponivelComMaiorPrioridade();
+            
+            if(processoCorrente.getTempoChegada() > tempoCorrente){
+                tempoCorrente = processoCorrente.getTempoChegada();
+            }
+              
             processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());
             int tempoFinal = tempoCorrente + processoCorrente.getBurstTime();
             Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
@@ -39,10 +44,10 @@ public class Priority extends StrategyEscalonador{
 		return menorTempoDeChegada;	
 	}
 	
-	private Processo pollProcessoComMenorTempoDeChegada(){
-		Processo processoEscolhido = processosEstadoPronto.last();
+	private Processo pollProcessoDisponivelComMaiorPrioridade(){
+		Processo processoEscolhido = processosEstadoPronto.first();
 		for(Processo p : processosEstadoPronto){
-			if(p.getTempoChegada() < processoEscolhido.getTempoChegada()){
+			if(p.getPrioridade() > processoEscolhido.getPrioridade() && p.getTempoChegada() < tempoCorrente){
 				processoEscolhido = p;
 			}
 		}
