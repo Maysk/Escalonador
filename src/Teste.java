@@ -80,18 +80,40 @@ public class Teste {
         Processo processo3 = new Processo(3, 1, 4, 3);
         Processo processo4 = new Processo(4, 4, 5, 3);
         
-        Processo processo1_ = new Processo(1, 2, 0, 1);
-        Processo processo2_ = new Processo(2, 4, 4, 2);
-        Processo processo3_ = new Processo(3, 8, 5, 3);
-        Processo processo4_ = new Processo(4, 5, 5, 3);
+        Processo processo1_ = new Processo(1, 1, 0, 1);
+        Processo processo2_ = new Processo(2, 2, 0, 2);
+        Processo processo3_ = new Processo(3, 3, 0, 3);
+        Processo processo4_ = new Processo(4, 4, 0, 3);
+        Processo processo5_ = new Processo(5, 5, 0, 1);
+        Processo processo6_ = new Processo(6, 6, 0, 2);
+        Processo processo7_ = new Processo(7, 1, 16, 3);
+        Processo processo8_ = new Processo(8, 2, 16, 3);
+        Processo processo9_ = new Processo(9, 3, 16, 1);
+        Processo processo10_ = new Processo(10, 4, 16, 2);
+        Processo processo11_ = new Processo(11, 1, 27, 3);
+        Processo processo12_ = new Processo(12, 2, 27, 3);
+        Processo processo13_ = new Processo(13, 3, 27, 1);
+        //Processo processo14_ = new Processo(14, 2, 17, 2);
+
         ArrayList<Processo> listaProcessos = new ArrayList<>();
         listaProcessos.add(processo1_);
         listaProcessos.add(processo2_);
         listaProcessos.add(processo3_);
         listaProcessos.add(processo4_);
-        StrategyEscalonador sjf = new ShortestJobFirst(listaProcessos);
+        listaProcessos.add(processo5_);
+        listaProcessos.add(processo6_);
+        listaProcessos.add(processo7_);
+        listaProcessos.add(processo8_);
+        listaProcessos.add(processo9_);
+        listaProcessos.add(processo10_);
+        listaProcessos.add(processo11_);
+        listaProcessos.add(processo12_);
+        listaProcessos.add(processo13_);
+        //listaProcessos.add(processo14_);
+        
+        StrategyEscalonador sjf = new ShortestJobFirstPreemptive(listaProcessos);
         ArrayList<Execucao> escalonamentoSJT = sjf.escalonar();
-        System.out.println("ShortestJobFirst:");
+        System.out.println("ShortestJobFirst Preemptivo:");
         showProcessos(listaProcessos);
         show(escalonamentoSJT);
         

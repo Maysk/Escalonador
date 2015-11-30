@@ -57,7 +57,9 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
     public Processo getProcessoComMenorBurstTime(){
         Processo atual = new Processo(-1,Integer.MAX_VALUE,Integer.MAX_VALUE,-1);
         for(Processo processo : this.processosEstadoPronto){
-            if(processo.getTempoChegada() <= this.tempoCorrente && processo.getBurstTimeRestante() < atual.getBurstTimeRestante()){
+            //if(processo.getTempoChegada() <= this.tempoCorrente && processo.getBurstTimeRestante() < atual.getBurstTimeRestante()){
+            if(processo.getTempoChegada() <= this.tempoCorrente && 
+              (processo.getBurstTimeRestante()<atual.getBurstTimeRestante()  ||  (processo.getBurstTimeRestante()==atual.getBurstTimeRestante() && processo.getTempoChegada()<atual.getTempoChegada()) )){
                 atual = processo;
             } 
         }
