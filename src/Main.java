@@ -10,11 +10,44 @@ public class Main {
 		}
 		
 		try{
+			
 			Leitor l = new Leitor(args[0]);
 			ArrayList<Processo> processos = l.readFile();
-			StrategyEscalonador escalonador;
+			
+			StrategyEscalonador escalonador = null;
 			ArrayList<Execucao> escalonamento;
-			escalonador = new FirstComeFirstServed(processos);
+			String escalonamentoEscolhido = args[1].toLowerCase();
+			
+			if(escalonamentoEscolhido.equals("fcfs")){
+				escalonador = new FirstComeFirstServed(processos);
+				
+			}else if(escalonamentoEscolhido.equals("rr")){
+				int timeQuantum = 0;
+				try{
+					timeQuantum = Integer.parseInt(args[2]);
+				}catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
+					throw new Exception("Time quantum não definido!!");
+				}
+				escalonador = new RoundRobin(processos, timeQuantum);
+				
+			}else if(escalonamentoEscolhido.equals("sjf")){
+				escalonador = new ShortestJobFirst(processos);
+				
+			}else if(escalonamentoEscolhido.equals("sjfp")){
+				escalonador = new ShortestJobFirstPreemptive(processos);
+			
+			}else if(escalonamentoEscolhido.equals("priority")){
+				escalonador = new Priority(processos);
+			
+			}else if(escalonamentoEscolhido.equals("priorityp")){
+				escalonador = new PriorityPreemptive(processos);
+			
+			}else{
+				System.out.println("Lascou!");
+				throw new Exception("Você escolheu um metodo invalido... Lamento...");
+			
+			}
+			
 			escalonamento = escalonador.escalonar();
 			showProcessos(processos);
 			show(escalonamento);
@@ -29,7 +62,7 @@ public class Main {
 			System.out.println("Problema na leitura!");
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 	}
