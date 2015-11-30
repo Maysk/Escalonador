@@ -8,36 +8,16 @@ public class Main {
 		for(String a: args){
 			System.out.println(a);
 		}
+		
 		try{
-			//Tenta ler o arquivo
 			Leitor l = new Leitor(args[0]);
 			ArrayList<Processo> processos = l.readFile();
-			
 			StrategyEscalonador escalonador;
 			ArrayList<Execucao> escalonamento;
-			
-			if(args[1].equalsIgnoreCase("fcfs")){
-				escalonador = new FirstComeFirstServed(processos);
-				
-			} else if(args[1].equalsIgnoreCase("rr")){
-				System.out.println("Round Robin foi escolhido!");
-				int quantum = Integer.parseInt(args[2]);
-				escalonador = new RoundRobin(processos, quantum);
-				
-			} else if(args[1].equalsIgnoreCase("sjf")){
-				System.out.println("Ainda não implementado, mas calma que jaja aparece.");
-				
-			} else if(args[1].equalsIgnoreCase("sjfp")){
-				System.out.println("Ainda não implementado, mas calma que jaja aparece.");
-			} else if(args[1].equalsIgnoreCase("priority")){
-				escalonador = new Priority(processos);
-			} else if(args[1].equalsIgnoreCase("priorityp")){
-				escalonador = new PriorityPreemptive(processos);
-			}
-			else{
-				throw new Exception("Escalonador Invalido");
-			}
-			
+			escalonador = new FirstComeFirstServed(processos);
+			escalonamento = escalonador.escalonar();
+			showProcessos(processos);
+			show(escalonamento);
 		}
 		catch(ArrayIndexOutOfBoundsException e){
 			System.out.println("Faltam argumentos!");
