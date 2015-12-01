@@ -19,7 +19,7 @@ public class ShortestJobFirst extends StrategyEscalonador{
     public ArrayList<Execucao> escalonar() {
         
         ArrayList<Execucao> historico = new ArrayList<>();
-
+        systemTimeInit = System.nanoTime();
         while(!this.processosEstadoPronto.isEmpty()){
             
             this.processoCorrente = this.getProcessoComMenorBurstTime();
@@ -36,6 +36,7 @@ public class ShortestJobFirst extends StrategyEscalonador{
                 this.tempoCorrente = tempoFinal;            
             }
         }
+        escalonamento = historico;
         return historico;
     }
 

@@ -17,6 +17,7 @@ public class FirstComeFirstServed extends StrategyEscalonador{
     }
     public ArrayList<Execucao> escalonar(){
         ArrayList<Execucao> historico = new ArrayList<>();
+        systemTimeInit = System.nanoTime();
         while(!processosEstadoPronto.isEmpty()){
             processoCorrente = processosEstadoPronto.pollFirst();
             
@@ -30,6 +31,7 @@ public class FirstComeFirstServed extends StrategyEscalonador{
             historico.add(execucaoCorrente);
             tempoCorrente = tempoFinal;
         }
+        escalonamento = historico;
         return historico;
     }
 }

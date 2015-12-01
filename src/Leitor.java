@@ -32,7 +32,7 @@ public class Leitor {
 			int prioridade = Integer.parseInt(s[3].trim());
 			p = new Processo(id, burstTime, tempoChegada, prioridade);
 		}catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
-			throw new Exception("Tem algo errado com o arquivo de entrada. Dá uma checada e depois volta. ;)");
+			throw new Exception("Tem algo errado com o arquivo de entrada. Da uma checada e depois volta. ;)");
 		}
 		return p;
 	}

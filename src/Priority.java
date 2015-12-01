@@ -16,6 +16,7 @@ public class Priority extends StrategyEscalonador{
 	@Override
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
+		systemTimeInit = System.nanoTime();
 		while(!processosEstadoPronto.isEmpty()){
             processoCorrente = pollProcessoDisponivelComMaiorPrioridade();
             
@@ -29,7 +30,7 @@ public class Priority extends StrategyEscalonador{
             historico.add(execucaoCorrente);
             tempoCorrente = tempoFinal;                
         }
-		
+        escalonamento = historico;
 		return historico;
 	}
 	

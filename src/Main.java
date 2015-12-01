@@ -26,7 +26,7 @@ public class Main {
 				try{
 					timeQuantum = Integer.parseInt(args[2]);
 				}catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
-					throw new Exception("Time quantum não definido!!");
+					throw new Exception("Time quantum nao definido!!");
 				}
 				escalonador = new RoundRobin(processos, timeQuantum);
 				
@@ -44,7 +44,7 @@ public class Main {
 			
 			}else{
 				System.out.println("Lascou!");
-				throw new Exception("Você escolheu um metodo invalido... Lamento...");
+				throw new Exception("Voce escolheu um metodo invalido... Lamento...");
 			
 			}
 			

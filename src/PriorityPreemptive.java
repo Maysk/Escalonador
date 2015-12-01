@@ -16,6 +16,7 @@ public class PriorityPreemptive extends StrategyEscalonador{
 	@Override
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
+		systemTimeInit = System.nanoTime();
 		Processo processoFalso = new Processo(0,0,Integer.MAX_VALUE,0);
 		processoCorrente = null;
 		while(!processosEstadoPronto.isEmpty()){
@@ -63,6 +64,7 @@ public class PriorityPreemptive extends StrategyEscalonador{
 			}
 			
         }	
+        escalonamento = historico;
 		return historico;
 	}
 	

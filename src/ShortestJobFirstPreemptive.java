@@ -18,6 +18,7 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
     public ArrayList<Execucao> escalonar() {
         int tempoNaoUsado, tempoInicial = -1, tempoFinal;
         ArrayList<Execucao> historico = new ArrayList<>();
+        systemTimeInit = System.nanoTime();
         this.processoCorrente = new Processo(-1,Integer.MAX_VALUE,Integer.MAX_VALUE,-1);
         
         while(!this.processosEstadoPronto.isEmpty()){            
@@ -49,6 +50,7 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
             }          	
             this.tempoCorrente = this.tempoCorrente + 1;
         }
+        escalonamento = historico;
         return historico;
     }
     
