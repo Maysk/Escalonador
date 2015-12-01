@@ -1,0 +1,20 @@
+body{
+	margin-top:25px;
+}
+.grafico{
+	border-width:1px;
+	border-style: solid;	
+	margin: 5px 0px 5px 0px;
+}
+#selecionadorDeArquivo{
+	display:inline;
+}
+canvas{
+	width: 100%;
+	max-width:8000px;
+	height: auto;
+	padding-right:20px;
+}
+#all{
+	display:none;
+}

@@ -1,0 +1,255 @@
+<!doctype html>
+
+<html>
+	<head>
+	  <meta charset="utf-8">
+
+	  <title>Estatísticas de Escalonamento</title>
+
+	  <link rel="stylesheet" href="bootstrap.css">
+	  <link rel="stylesheet" href="style.css">
+	  <script src="Chart.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="text-center">
+			<input id="selecionadorDeArquivo" onchange="selecionouArquivo()" type="file"></input>
+		</div>
+		<div id="all" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4">
+					<div id="divGraficoTempoTotal" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
+						<div class="panel-heading">Gráfico do Tempo Total</div>
+						<div class="panel-body">
+							<canvas id="graficoTempoTotal"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div id="divGraficoMediaThroughput" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
+						<div class="panel-heading">Gráfico da Média de Throughput</div>
+						<div class="panel-body">
+							<canvas id="graficoMediaThroughput"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div id="divGraficoMediaTurnaround" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
+						<div class="panel-heading">Gráfico da Média de Turnaround</div>
+						<div class="panel-body">
+							<canvas id="graficoMediaTurnaround"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<div id="divGraficoMediaTempoEspera" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
+						<div class="panel-heading">Gráfico da Média do Tempo de Espera</div>
+						<div class="panel-body">
+							<canvas id="graficoMediaTempoEspera"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div id="divGraficoMediaTempoResposta" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
+						<div class="panel-heading">Gráfico da Média do Tempo de Resposta</div>
+						<div class="panel-body">
+							<canvas id="graficoMediaTempoResposta"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div id="divGraficoNumeroProcessos" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
+						<div class="panel-heading">Gráfico do Número de Processos</div>
+						<div class="panel-body">
+							<canvas id="graficoNumeroProcessos"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+
+
+	<script>
+		var arquivo;
+		var leitor = new FileReader();
+		var conteudo;		
+		var listaEstatisticas = [];
+		Chart.defaults.global.responsive = true;
+
+		function selecionouArquivo(){		
+			arquivo = document.getElementById("selecionadorDeArquivo").files[0];
+			document.getElementById("selecionadorDeArquivo").style.display = 'none';
+			leitor.readAsText(arquivo);
+
+		}
+
+		leitor.onload = function(){
+			conteudo = leitor.result;
+			lerArquivo();	
+		}
+
+		function lerArquivo(){
+			conteudo = conteudo.split(/[\r\n]+/g);
+			var i = 0;
+			while(i<conteudo.length){
+				listaEstatisticas.push(new Estatistica(conteudo[i],conteudo[i+1].split(":")[1],conteudo[i+2].split(":")[1],conteudo[i+3].split(":")[1],conteudo[i+4].split(":")[1],conteudo[i+5].split(":")[1],conteudo[i+6].split(":")[1]));
+				i=i+7;
+			}
+
+			for(var k=0;k<listaEstatisticas.length;k++){
+				listaEstatisticas[k].print();
+			}
+			desenharGraficos();
+		}
+
+		//Definicao da classe Estatistica
+		function Estatistica(nomeEscalonador, tempoTotal, mediaThroughput, mediaTurnaround, mediaTempoEspera, mediaTempoResposta,numeroProcessos){
+			
+			this.nomeEscalonador = nomeEscalonador;
+			this.tempoTotal = tempoTotal;
+			this.mediaThroughput = mediaThroughput;
+			this.mediaTurnaround = mediaTurnaround;
+			this.mediaTempoEspera = mediaTempoEspera;
+			this.mediaTempoResposta = mediaTempoResposta;
+			this.numeroProcessos = numeroProcessos;
+
+			this.print = function(){
+				console.log("Escalonador: "+this.nomeEscalonador+
+							"\n    tempo total: "+ this.tempoTotal +
+							"\n    media throughput: "+ this.mediaThroughput +
+							"\n    media turnaround: "+ this.mediaTurnaround +
+							"\n    media tempo espera: "+ this.mediaTempoEspera +
+							"\n    media tempo resposta: "+ this.mediaTempoResposta +
+							"\n    numero de processos: "+ this.numeroProcessos 
+							);
+				return this;
+			}
+		}
+
+		function desenharGraficos(){
+			document.getElementById("all").style.display = "block";
+
+			var labelsEscalonadores = [];
+			var dadosTempoTotal = [], dadosMediaThroughput = [], dadosMediaTurnaround = [],
+			dadosMediaTempoEspera = [], dadosMediaTempoResposta = [], dadosNumeroProcessos = [];
+
+			for(var i=0; i<listaEstatisticas.length; i++){
+				labelsEscalonadores.push(listaEstatisticas[i].nomeEscalonador);
+				dadosTempoTotal.push(listaEstatisticas[i].tempoTotal);
+				dadosMediaThroughput.push(listaEstatisticas[i].mediaThroughput);
+				dadosMediaTurnaround.push(listaEstatisticas[i].mediaTurnaround);
+				dadosMediaTempoEspera.push(listaEstatisticas[i].mediaTempoEspera);
+				dadosMediaTempoResposta.push(listaEstatisticas[i].mediaTempoResposta);
+				dadosNumeroProcessos.push(listaEstatisticas[i].numeroProcessos);
+			};
+
+			var graficoTempoTotal = {
+				labels:labelsEscalonadores,
+			    datasets: [
+			        {
+			            fillColor: "rgba(151,187,205,0.5)",
+			            strokeColor: "rgba(151,187,205,0.8)",
+			            highlightFill: "rgba(151,187,205,0.75)",
+			            highlightStroke: "rgba(151,187,205,1)",
+			            data: dadosTempoTotal
+			        }
+			    ]
+			};
+			var graficoMediaThroughput = {
+				labels:labelsEscalonadores,
+			    datasets: [
+			        {
+			            fillColor: "rgba(151,187,205,0.5)",
+			            strokeColor: "rgba(151,187,205,0.8)",
+			            highlightFill: "rgba(151,187,205,0.75)",
+			            highlightStroke: "rgba(151,187,205,1)",
+			            data: dadosMediaThroughput
+			        }
+			    ]
+			};
+			var graficoMediaTurnaround = {
+				labels:labelsEscalonadores,
+			    datasets: [
+			        {
+			            fillColor: "rgba(151,187,205,0.5)",
+			            strokeColor: "rgba(151,187,205,0.8)",
+			            highlightFill: "rgba(151,187,205,0.75)",
+			            highlightStroke: "rgba(151,187,205,1)",
+			            data: dadosMediaTurnaround
+			        }
+			    ]
+			};
+			var graficoMediaTempoEspera = {
+				labels:labelsEscalonadores,
+			    datasets: [
+			        {
+			            fillColor: "rgba(151,187,205,0.5)",
+			            strokeColor: "rgba(151,187,205,0.8)",
+			            highlightFill: "rgba(151,187,205,0.75)",
+			            highlightStroke: "rgba(151,187,205,1)",
+			            data: dadosMediaTempoEspera
+			        }
+			    ]
+			};
+			var graficoMediaTempoResposta = {
+				labels:labelsEscalonadores,
+			    datasets: [
+			        {
+			            fillColor: "rgba(151,187,205,0.5)",
+			            strokeColor: "rgba(151,187,205,0.8)",
+			            highlightFill: "rgba(151,187,205,0.75)",
+			            highlightStroke: "rgba(151,187,205,1)",
+			            data: dadosMediaTempoResposta
+			        }
+			    ]
+			};
+			var graficoNumeroProcessos = {
+				labels:labelsEscalonadores,
+			    datasets: [
+			        {
+			            fillColor: "rgba(151,187,205,0.5)",
+			            strokeColor: "rgba(151,187,205,0.8)",
+			            highlightFill: "rgba(151,187,205,0.75)",
+			            highlightStroke: "rgba(151,187,205,1)",
+			            data: dadosNumeroProcessos
+			        }
+			    ]
+			};
+
+			var ctxTempoTotal = document.getElementById("graficoTempoTotal").getContext("2d");
+			var graficoTempoTotal_ = new Chart(ctxTempoTotal).Bar(graficoTempoTotal);
+
+			var ctxMediaThroughput = document.getElementById("graficoMediaThroughput").getContext("2d");
+			var graficoMediaThroughput_ = new Chart(ctxMediaThroughput).Bar(graficoMediaThroughput);
+
+			var ctxMediaTurnaround = document.getElementById("graficoMediaTurnaround").getContext("2d");
+			var graficoMediaTurnaround_ = new Chart(ctxMediaTurnaround).Bar(graficoMediaTurnaround);
+
+			var ctxMediaTempoEspera = document.getElementById("graficoMediaTempoEspera").getContext("2d");
+			var graficoMediaTempoEspera_ = new Chart(ctxMediaTempoEspera).Bar(graficoMediaTempoEspera);
+
+			var ctxMediaTempoResposta = document.getElementById("graficoMediaTempoResposta").getContext("2d");
+			var graficoMediaTempoResposta_ = new Chart(ctxMediaTempoResposta).Bar(graficoMediaTempoResposta);
+
+			var ctxNumeroProcessos = document.getElementById("graficoNumeroProcessos").getContext("2d");
+			var graficoNumeroProcessos_ = new Chart(ctxNumeroProcessos).Bar(graficoNumeroProcessos);
+
+
+		}
+
+		function destacarDivGrafico(id){
+			document.getElementById(id).className = document.getElementById(id).className.replace(" panel-info"," panel-primary");
+		}
+
+
+		function removerDestaqueDivGrafico(id){
+			document.getElementById(id).className = document.getElementById(id).className.replace(" panel-primary"," panel-info");
+		}
+
+	</script>
+</html>
