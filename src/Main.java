@@ -49,6 +49,7 @@ public class Main {
 			}
 			
 			escalonamento = escalonador.escalonar();
+			escalonador.gerarSaida(escalonamentoEscolhido, "Sei la");
 			showProcessos(processos);
 			show(escalonamento);
 		}
@@ -65,7 +66,10 @@ public class Main {
 			System.out.println(e.getMessage());
 		}
 		
+
 	}
+	
+
 	
     public static void show(ArrayList<Execucao> escalonamento){
         for(Execucao e : escalonamento)
