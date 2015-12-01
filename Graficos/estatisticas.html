@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div id="divGraficoTempoTotal" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
-						<div class="panel-heading"><div class="tituloGrafico">Tempo Total</div><div class="text-right"><a href="#" id="tooltipBotaoAlternarTipoGraficoTempoTotal" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoTempoTotal" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
+						<div class="panel-heading"><div class="tituloGrafico">Tempo Total</div><div class="text-right"><a id="tooltipBotaoAlternarTipoGraficoTempoTotal" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoTempoTotal" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
 						<div id="containerGraficoTempoTotal" class="panel-body">
 							<canvas id="graficoTempoTotal"></canvas>
 						</div>
@@ -37,7 +37,7 @@
 
 				<div class="col-sm-4">
 					<div id="divGraficoMediaThroughput" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
-						<div class="panel-heading"><div class="tituloGrafico">Média de Throughput</div><div class="text-right"><a href="#" id="tooltipBotaoAlternarTipoGraficoMediaThroughput" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaThroughput" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
+						<div class="panel-heading"><div class="tituloGrafico">Média de Throughput</div><div class="text-right"><a id="tooltipBotaoAlternarTipoGraficoMediaThroughput" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaThroughput" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
 						<div id="containerGraficoMediaThroughput" class="panel-body">
 							<canvas id="graficoMediaThroughput"></canvas>
 						</div>
@@ -46,7 +46,7 @@
 
 				<div class="col-sm-4">
 					<div id="divGraficoMediaTurnaround" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
-						<div class="panel-heading"><div class="tituloGrafico">Média de Turnaround</div><div class="text-right"><a href="#" id="tooltipBotaoAlternarTipoGraficoMediaTurnaround" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTurnaround" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
+						<div class="panel-heading"><div class="tituloGrafico">Média de Turnaround</div><div class="text-right"><a id="tooltipBotaoAlternarTipoGraficoMediaTurnaround" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTurnaround" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
 						<div  id="containerGraficoMediaTurnaround" class="panel-body">
 							<canvas id="graficoMediaTurnaround"></canvas>
 						</div>
@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div id="divGraficoMediaTempoEspera" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
-						<div class="panel-heading"><div class="tituloGrafico">Média do Tempo de Espera</div><div class="text-right"><a href="#" id="tooltipBotaoAlternarTipoGraficoMediaTempoEspera" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTempoEspera" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
+						<div class="panel-heading"><div class="tituloGrafico">Média do Tempo de Espera</div><div class="text-right"><a id="tooltipBotaoAlternarTipoGraficoMediaTempoEspera" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTempoEspera" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
 						<div id="containerGraficoMediaTempoEspera" class="panel-body">
 							<canvas id="graficoMediaTempoEspera"></canvas>
 						</div>
@@ -65,7 +65,7 @@
 				</div>
 				<div class="col-sm-4">
 					<div id="divGraficoMediaTempoResposta" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
-						<div class="panel-heading"><div class="tituloGrafico">Média do Tempo de Resposta</div><div class="text-right"><a href="#" id="tooltipBotaoAlternarTipoGraficoMediaTempoResposta" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTempoResposta" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
+						<div class="panel-heading"><div class="tituloGrafico">Média do Tempo de Resposta</div><div class="text-right"><a id="tooltipBotaoAlternarTipoGraficoMediaTempoResposta" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTempoResposta" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
 						<div  id="containerGraficoMediaTempoResposta" class="panel-body">
 							<canvas id="graficoMediaTempoResposta"></canvas>
 						</div>
@@ -73,7 +73,7 @@
 				</div>
 				<div class="col-sm-4">
 					<div id="divGraficoMediaTrocaContexto" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
-						<div class="panel-heading"><div class="tituloGrafico">Média da Troca de Contexto dos Processos</div><div class="text-right"><a href="#" id="tooltipBotaoAlternarTipoGraficoMediaTrocaContexto" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTrocaContexto" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
+						<div class="panel-heading"><div class="tituloGrafico">Média da Troca de Contexto dos Processos</div><div class="text-right"><a id="tooltipBotaoAlternarTipoGraficoMediaTrocaContexto" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoMediaTrocaContexto" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
 						<div id="containerGraficoMediaTrocaContexto" class="panel-body">
 							<canvas id="graficoMediaTrocaContexto"></canvas>
 						</div>
@@ -84,7 +84,7 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div id="divGraficoNumeroProcessos" onmouseover="destacarDivGrafico(this.id)" onmouseout="removerDestaqueDivGrafico(this.id)" class="grafico panel panel-info">
-						<div class="panel-heading"><div class="tituloGrafico">Número de Processos</div><div class="text-right"><a href="#" id="tooltipBotaoAlternarTipoGraficoNumeroProcessos" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoNumeroProcessos" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
+						<div class="panel-heading"><div class="tituloGrafico">Número de Processos</div><div class="text-right"><a id="tooltipBotaoAlternarTipoGraficoNumeroProcessos" data-toggle="tooltip" title="Alternar para Gráfico de Linha"><button id="botaoAlternarTipoGraficoNumeroProcessos" onclick="alternarTipoGrafico(this.id)" class="botaoMudarTipoGrafico"> <i class="fa fa-line-chart"></i></button></a></div></div>
 						<div  id="containerGraficoNumeroProcessos" class="panel-body">
 							<canvas id="graficoNumeroProcessos"></canvas>
 						</div>
