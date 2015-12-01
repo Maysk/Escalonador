@@ -1,23 +1,99 @@
-SJF
-Tempo total de processamento: 10
-Média Throughput dos processos: 11
-Média Turnaround dos processos: 12
-Média tempo de espera dos processos: 13
-Média tempo de resposta dos processos: 14
-Número de processos executados: 4
+FCFS Não sei
+Tempo total de processamento: 30.0
+Percentual	de utilização média de cada CPU: 10.5
+Média Throughput dos processos: 0.1
+Média Turnaround dos processos: 13.666666666666666
+Média Espera dos processos: 3.6666666666666665
+Média Resposta dos processos: 3.6666666666666665
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 3
 
-RR QT=5
-Tempo total de processamento: 20
-Média Throughput dos processos: 21
-Média Turnaround dos processos: 22
-Média tempo de espera dos processos: 23
-Média tempo de resposta dos processos: 24
-Número de processos executados: 4
+RR Não sei
+Tempo total de processamento: 162.0
+Percentual	de utilização média de cada CPU: 15.75
+Média Throughput dos processos: 0.024691358024691357
+Média Turnaround dos processos: 95.5
+Média Espera dos processos: 55.0
+Média Resposta dos processos: 14.75
+Média Troca de Contextos dos processos: 2.0
+Numero	de Processos executados: 4
 
-SJFP
-Tempo total de processamento: 30
-Média Throughput dos processos: 31
-Média Turnaround dos processos: 32
-Média tempo de espera dos processos: 33
-Média tempo de resposta dos processos: 34
-Número de processos executados: 4
+priority Não sei
+Tempo total de processamento: 30.0
+Percentual	de utilização média de cada CPU: 38.0
+Média Throughput dos processos: 0.1
+Média Turnaround dos processos: 23.0
+Média Espera dos processos: 13.0
+Média Resposta dos processos: 13.0
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 3
+
+priorityp Não sei
+Tempo total de processamento: 9.0
+Percentual	de utilização média de cada CPU: 26.75
+Média Throughput dos processos: 0.3333333333333333
+Média Turnaround dos processos: 6.0
+Média Espera dos processos: 3.0
+Média Resposta dos processos: 0.0
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 3
+
+sjf Não sei
+Tempo total de processamento: 37.0
+Percentual	de utilização média de cada CPU: 6.5
+Média Throughput dos processos: 0.35135135135135137
+Média Turnaround dos processos: 7.846153846153846
+Média Espera dos processos: 5.0
+Média Resposta dos processos: 3.769230769230769
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 13
+
+FCFS Não sei
+Tempo total de processamento: 30.0
+Percentual	de utilização média de cada CPU: 11.5
+Média Throughput dos processos: 0.1
+Média Turnaround dos processos: 13.666666666666666
+Média Espera dos processos: 3.6666666666666665
+Média Resposta dos processos: 3.6666666666666665
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 3
+
+RR Não sei
+Tempo total de processamento: 162.0
+Percentual	de utilização média de cada CPU: 15.25
+Média Throughput dos processos: 0.024691358024691357
+Média Turnaround dos processos: 95.5
+Média Espera dos processos: 55.0
+Média Resposta dos processos: 14.75
+Média Troca de Contextos dos processos: 2.0
+Numero	de Processos executados: 4
+
+priority Não sei
+Tempo total de processamento: 30.0
+Percentual	de utilização média de cada CPU: 41.0
+Média Throughput dos processos: 0.1
+Média Turnaround dos processos: 23.0
+Média Espera dos processos: 13.0
+Média Resposta dos processos: 13.0
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 3
+
+priorityp Não sei
+Tempo total de processamento: 9.0
+Percentual	de utilização média de cada CPU: 30.0
+Média Throughput dos processos: 0.3333333333333333
+Média Turnaround dos processos: 6.0
+Média Espera dos processos: 3.0
+Média Resposta dos processos: 0.0
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 3
+
+sjf Não sei
+Tempo total de processamento: 37.0
+Percentual	de utilização média de cada CPU: 11.25
+Média Throughput dos processos: 0.35135135135135137
+Média Turnaround dos processos: 7.846153846153846
+Média Espera dos processos: 5.0
+Média Resposta dos processos: 3.769230769230769
+Média Troca de Contextos dos processos: 1.0
+Numero	de Processos executados: 13
