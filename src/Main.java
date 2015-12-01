@@ -17,6 +17,7 @@ public class Main {
 			StrategyEscalonador escalonador = null;
 			ArrayList<Execucao> escalonamento;
 			String escalonamentoEscolhido = args[1].toLowerCase();
+			String paramentroDaEstatistica = "";
 			
 			if(escalonamentoEscolhido.equals("fcfs")){
 				escalonador = new FirstComeFirstServed(processos);
@@ -25,6 +26,10 @@ public class Main {
 				int timeQuantum = 0;
 				try{
 					timeQuantum = Integer.parseInt(args[2]);
+					if(timeQuantum<=0){
+						throw new Exception("Time quantum invalido!!");
+					}
+					paramentroDaEstatistica = args[2];
 				}catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
 					throw new Exception("Time quantum nao definido!!");
 				}
@@ -49,7 +54,7 @@ public class Main {
 			}
 			
 			escalonamento = escalonador.escalonar();
-			escalonador.gerarSaida(escalonamentoEscolhido, "Sei la");
+			escalonador.gerarSaida(escalonamentoEscolhido.toUpperCase(), paramentroDaEstatistica);
 			showProcessos(processos);
 			show(escalonamento);
 		}

@@ -21,17 +21,16 @@ public abstract class StrategyEscalonador {
     protected Processo processoCorrente;
     protected int tempoCorrente;
     protected ArrayList<Execucao> escalonamento;
-    private FileWriter file;
-    private BufferedWriter saida;
     protected long systemTimeInit;
     
     public abstract ArrayList<Execucao> escalonar();
 
     public void gerarSaida(String algoritmo,String parametros){ 
         try{ 
-            file = new FileWriter("estatisticas.txt",true); 
+        	FileWriter file;
+            BufferedWriter saida;
+        	file = new FileWriter("estatisticas.txt",true); 
             saida = new BufferedWriter(file); 
-             
             double tempototal = 0; 
             double mediaThroughput = 0;
             double mediaTurnaround = 0;
@@ -39,7 +38,7 @@ public abstract class StrategyEscalonador {
             double mediaResposta = 0;
             double mediaTrocaContexto;
             double usoCPU = 0;
-            long systemTime     = System.nanoTime();
+            long systemTime = System.nanoTime();
             long processCpuTime = 0;
             OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 	        processCpuTime = operatingSystemMXBean.getProcessCpuTime();
@@ -58,9 +57,6 @@ public abstract class StrategyEscalonador {
             mediaResposta/= processos.size();
 
             mediaTrocaContexto = escalonamento.size() / processos.size();
-
-            
-
 
 	        // System.out.println("Processadores:"+operatingSystemMXBean.getAvailableProcessors()+"  - "+processCpuTime+" - "+systemTimeInit +" - " + systemTime +" = " + (processCpuTime/(systemTime - systemTimeInit)));
 
