@@ -19,7 +19,7 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
         int tempoNaoUsado, tempoInicial = -1, tempoFinal;
         ArrayList<Execucao> historico = new ArrayList<>();
         this.processoCorrente = new Processo(-1,Integer.MAX_VALUE,Integer.MAX_VALUE,-1);
-        //TODO: Adiocionar o tempo de troca de contexto.
+        
         while(!this.processosEstadoPronto.isEmpty()){            
             Processo proximoProcesso = this.getProcessoComMenorBurstTime();
             
@@ -33,6 +33,7 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
             		}
             		
             	}else{ //Se precisa mudar o processo
+                        this.tempoCorrente = this.tempoCorrente + this.tempoTrocaContexto;
             		if(this.processoCorrente.getId() != -1 && this.processoCorrente.getBurstTimeRestante() != 0){ 
             			//relativo a primeira entrada || caso tenha que trocar por um ja terminado            		
             			historico.add(new Execucao(this.processoCorrente,tempoInicial,this.tempoCorrente));            			
