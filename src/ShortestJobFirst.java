@@ -19,7 +19,6 @@ public class ShortestJobFirst extends StrategyEscalonador{
     public ArrayList<Execucao> escalonar() {
         
         ArrayList<Execucao> historico = new ArrayList<>();
-        systemTimeInit = System.nanoTime();
         while(!this.processosEstadoPronto.isEmpty()){
             
             this.processoCorrente = this.getProcessoComMenorBurstTime();
@@ -27,6 +26,7 @@ public class ShortestJobFirst extends StrategyEscalonador{
             if(this.processoCorrente.getId() == -1){                               
                 this.tempoCorrente++;
             }else{
+                tempoCorrente += tempoTrocaContexto;
                 int tempoNaoUsado = this.processoCorrente.mandaParaCPU(this.tempoCorrente, this.processoCorrente.getBurstTime());
                 int tempoFinal = this.tempoCorrente + this.processoCorrente.getBurstTime() + tempoNaoUsado;
 

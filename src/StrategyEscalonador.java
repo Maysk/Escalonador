@@ -12,16 +12,13 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-// import java.lang.management.OperatingSystemMXBean;
-import com.sun.management.OperatingSystemMXBean;
-import java.lang.management.ManagementFactory;
 public abstract class StrategyEscalonador {
     protected ArrayList<Processo> processos;
     protected TreeSet<Processo> processosEstadoPronto;
     protected Processo processoCorrente;
     protected int tempoCorrente;
     protected ArrayList<Execucao> escalonamento;
-    protected long systemTimeInit;
+    protected final int tempoTrocaContexto = 10;
     
     public abstract ArrayList<Execucao> escalonar();
 
@@ -38,11 +35,6 @@ public abstract class StrategyEscalonador {
             double mediaResposta = 0;
             double mediaTrocaContexto;
             double usoCPU = 0;
-            long systemTime = System.nanoTime();
-            long processCpuTime = 0;
-            OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-	        processCpuTime = operatingSystemMXBean.getProcessCpuTime();
-
 
             for(Processo a : processos){
             	tempototal+= a.getBurstTime();
@@ -58,16 +50,15 @@ public abstract class StrategyEscalonador {
 
             mediaTrocaContexto = escalonamento.size() / processos.size();
 
-	        // System.out.println("Processadores:"+operatingSystemMXBean.getAvailableProcessors()+"  - "+processCpuTime+" - "+systemTimeInit +" - " + systemTime +" = " + (processCpuTime/(systemTime - systemTimeInit)));
-
-	        usoCPU = (processCpuTime/(systemTime - systemTimeInit));
+            int inicioProcessamento = escalonamento.get(0).getTempoInicio() - tempoTrocaContexto;
+            int fimProcessamento = escalonamento.get(escalonamento.size() - 1).getTempoFim();
+	        usoCPU = 100 * tempototal/(fimProcessamento - inicioProcessamento);
 
             saida.write(algoritmo + " " + parametros); 
             saida.newLine(); 
             saida.write("Tempo total de processamento: " + tempototal); 
             saida.newLine(); 
-            // saida.write("Percentual	de utilização de cada CPU: " + usoCPU +"\tUso médio: "+ (usoCPU/operatingSystemMXBean.getAvailableProcessors())); 
-            saida.write("Percentual	de utilização média de cada CPU: " + (usoCPU/operatingSystemMXBean.getAvailableProcessors())); 
+            saida.write("Percentual	de utilização da CPU(%): " + usoCPU); 
             saida.newLine(); 
             saida.write("Média Throughput dos processos: " + mediaThroughput); 
             saida.newLine(); 

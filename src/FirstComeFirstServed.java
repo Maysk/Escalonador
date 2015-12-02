@@ -17,14 +17,13 @@ public class FirstComeFirstServed extends StrategyEscalonador{
     }
     public ArrayList<Execucao> escalonar(){
         ArrayList<Execucao> historico = new ArrayList<>();
-        systemTimeInit = System.nanoTime();
         while(!processosEstadoPronto.isEmpty()){
             processoCorrente = processosEstadoPronto.pollFirst();
             
             if(processoCorrente.getTempoChegada() > tempoCorrente){
               tempoCorrente = processoCorrente.getTempoChegada();
             }
-            
+            tempoCorrente += tempoTrocaContexto;
             int tempoNaoUsado = processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());
             int tempoFinal = tempoCorrente + processoCorrente.getBurstTime() - tempoNaoUsado;
             Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);

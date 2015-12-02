@@ -18,9 +18,8 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
     public ArrayList<Execucao> escalonar() {
         int tempoNaoUsado, tempoInicial = -1, tempoFinal;
         ArrayList<Execucao> historico = new ArrayList<>();
-        systemTimeInit = System.nanoTime();
         this.processoCorrente = new Processo(-1,Integer.MAX_VALUE,Integer.MAX_VALUE,-1);
-        
+        //TODO: Adiocionar o tempo de troca de contexto.
         while(!this.processosEstadoPronto.isEmpty()){            
             Processo proximoProcesso = this.getProcessoComMenorBurstTime();
             

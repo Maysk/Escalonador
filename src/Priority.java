@@ -16,14 +16,13 @@ public class Priority extends StrategyEscalonador{
 	@Override
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
-		systemTimeInit = System.nanoTime();
 		while(!processosEstadoPronto.isEmpty()){
             processoCorrente = pollProcessoDisponivelComMaiorPrioridade();
             
             if(processoCorrente.getTempoChegada() > tempoCorrente){
                 tempoCorrente = processoCorrente.getTempoChegada();
             }
-              
+            tempoCorrente += tempoTrocaContexto;
             processoCorrente.mandaParaCPU(tempoCorrente, processoCorrente.getBurstTime());
             int tempoFinal = tempoCorrente + processoCorrente.getBurstTime();
             Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
