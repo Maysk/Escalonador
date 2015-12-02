@@ -17,6 +17,7 @@ public class PriorityPreemptive extends StrategyEscalonador{
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
 		Processo processoFalso = new Processo(0,0,Integer.MAX_VALUE,0);
+		int tempoFinal;
 		processoCorrente = null;
 		//TODO: Adiocionar o tempo de troca de contexto.
 		while(!processosEstadoPronto.isEmpty()){
@@ -28,7 +29,8 @@ public class PriorityPreemptive extends StrategyEscalonador{
                 tempoCorrente = processoCorrente.getTempoChegada();
             }
 			
-			int tempoFinal = tempoCorrente + processoCorrente.getBurstTimeRestante();
+			tempoCorrente = tempoCorrente + tempoTrocaContexto; 
+			tempoFinal = tempoCorrente + processoCorrente.getBurstTimeRestante();
 			Processo processoCandidato = processoFalso;
 			for (Processo a : processosEstadoPronto){
 				if(a.getPrioridade() > processoCorrente.getPrioridade() && a.getTempoChegada() <= tempoFinal && a.getPrioridade() >= processoCandidato.getPrioridade() && a.getTempoChegada() < processoCandidato.getTempoChegada()){
