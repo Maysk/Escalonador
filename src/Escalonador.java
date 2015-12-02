@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class Main {
+public class Escalonador {
 	public static void main(String args[]){
 		for(String a: args){
 			System.out.println(a);
