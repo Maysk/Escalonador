@@ -177,7 +177,7 @@
 				}
 			}else{ //se for Linux ou outro
 				conteudo = conteudo.split("\n\n");
-				for(var i=0; i<conteudo.length;i++){
+				for(var i=0; i<conteudo.length-1;i++){
 					var linhas = conteudo[i].split('\n');
 					listaEstatisticas.push(new Estatistica(linhas[0],linhas[1].split(":")[1],linhas[2].split(":")[1],linhas[3].split(":")[1],linhas[4].split(":")[1],linhas[5].split(":")[1],linhas[6].split(":")[1],linhas[7].split(":")[1],linhas[8].split(":")[1]));
 				}
