@@ -17,7 +17,7 @@ public class PriorityPreemptive extends StrategyEscalonador{
 	public ArrayList<Execucao> escalonar() {
 		ArrayList<Execucao> historico = new ArrayList<>();
 		Processo processoFalso = new Processo(0,0,Integer.MAX_VALUE,0);
-		int tempoFinal;
+		int tempoFinal=0;
 		processoCorrente = null;
 		//TODO: Adiocionar o tempo de troca de contexto.
 		while(!processosEstadoPronto.isEmpty()){
@@ -28,8 +28,7 @@ public class PriorityPreemptive extends StrategyEscalonador{
 			if(processoCorrente.getTempoChegada() > tempoCorrente){
                 tempoCorrente = processoCorrente.getTempoChegada();
             }
-			
-			tempoCorrente = tempoCorrente + tempoTrocaContexto; 
+			tempoCorrente = tempoCorrente + tempoTrocaContexto;
 			tempoFinal = tempoCorrente + processoCorrente.getBurstTimeRestante();
 			Processo processoCandidato = processoFalso;
 			for (Processo a : processosEstadoPronto){
@@ -47,12 +46,16 @@ public class PriorityPreemptive extends StrategyEscalonador{
 			}
 			else{
 				int quantidadeDeTempo; 
-				if(processoCorrente.getTempoChegada() == tempoCorrente){
-					quantidadeDeTempo = processoCandidato.getTempoChegada() - processoCorrente.getTempoChegada();
+				if(processoCorrente.getTempoChegada() == tempoCorrente - tempoTrocaContexto){
+					quantidadeDeTempo = processoCandidato.getTempoChegada() - processoCorrente.getTempoChegada() - tempoTrocaContexto;
 				}
 				else{
 					quantidadeDeTempo = processoCandidato.getTempoChegada() - processoCorrente.getTempoChegada() - tempoCorrente;
 				}
+				
+				if(quantidadeDeTempo <0){quantidadeDeTempo = 0;}
+				
+				
 				tempoFinal = tempoCorrente + quantidadeDeTempo;
 				processoCorrente.mandaParaCPU(tempoCorrente, quantidadeDeTempo);
 				Execucao execucaoCorrente = new Execucao(processoCorrente, tempoCorrente, tempoFinal);
@@ -82,11 +85,19 @@ public class PriorityPreemptive extends StrategyEscalonador{
 	
 	private Processo pollProcessoDisponivelComMaiorPrioridade(){
 		Processo processoEscolhido = processosEstadoPronto.first();
-		boolean condicao1, condicao2;
+		boolean condicao;
 		for(Processo p : processosEstadoPronto){
-			condicao1 = p.getPrioridade() > processoEscolhido.getPrioridade() && p.getTempoChegada() <= tempoCorrente;
-			condicao2 = p.getPrioridade() == processoEscolhido.getPrioridade() && p.getTempoChegada() < processoEscolhido.getTempoChegada() && p.getTempoChegada() < tempoCorrente ;	
-			if(condicao1 || condicao2){
+			if(p.getPrioridade() > processoEscolhido.getPrioridade()){
+				condicao = p.getTempoChegada() <= tempoCorrente || ((p.getTempoChegada() > tempoCorrente && processoEscolhido.getTempoChegada()>tempoCorrente) && (p.getTempoChegada() < processoEscolhido.getTempoChegada()));
+			}
+			else if(p.getPrioridade() == processoEscolhido.getPrioridade()){
+				condicao = p.getTempoChegada() < processoEscolhido.getTempoChegada();
+			}	
+			else{
+				condicao = p.getTempoChegada() < processoEscolhido.getTempoChegada() && processoEscolhido.getTempoChegada() > tempoCorrente;
+			}
+ 
+			if(condicao){
 				processoEscolhido = p;
 			}
 		
