@@ -19,7 +19,8 @@ public class Leitor {
 			splitedLine = line.split(",");
 			processos.add(convertToProcess(splitedLine));
 		}
-		
+		buff.close();
+		fr.close();
 		return processos;			
 	}
 
