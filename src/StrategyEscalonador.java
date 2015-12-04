@@ -43,16 +43,17 @@ public abstract class StrategyEscalonador {
             	mediaResposta+= a.getTempoResposta();
             }
 
-            mediaThroughput = processos.size() / tempototal;
+           
             mediaTurnaround/= processos.size();
             mediaEspera/= processos.size();
             mediaResposta/= processos.size();
 
-            mediaTrocaContexto = escalonamento.size() / processos.size();
+            mediaTrocaContexto =(double) escalonamento.size() / processos.size();
 
             int inicioProcessamento = escalonamento.get(0).getTempoInicio() - tempoTrocaContexto;
             int fimProcessamento = escalonamento.get(escalonamento.size() - 1).getTempoFim();
-	        usoCPU = 100 * tempototal/(fimProcessamento - inicioProcessamento);
+	    usoCPU = 100 * tempototal/(fimProcessamento - inicioProcessamento);
+            mediaThroughput = (double ) processos.size() / (fimProcessamento - inicioProcessamento);
 
             saida.write(algoritmo + " " + parametros); 
             saida.newLine(); 
