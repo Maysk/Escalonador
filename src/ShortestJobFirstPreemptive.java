@@ -30,13 +30,13 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
             		if(this.processoCorrente.getBurstTimeRestante() == 0){ //Se processo acabou a execucao
             			historico.add(new Execucao(this.processoCorrente,tempoInicial,this.tempoCorrente+1));
             			this.processosEstadoPronto.remove(this.processoCorrente);            			
-            		}
+                        }
             		
-            	}else{ //Se precisa mudar o processo
-                        this.tempoCorrente = this.tempoCorrente + this.tempoTrocaContexto;
-            		if(this.processoCorrente.getId() != -1 && this.processoCorrente.getBurstTimeRestante() != 0){ 
+            	}else{ //Se precisa mudar o processo                                                
+                        this.tempoCorrente = this.tempoCorrente + this.tempoTrocaContexto;                        
+            		if(this.processoCorrente.getId() != -1 && this.processoCorrente.getBurstTimeRestante() != 0){                                 
             			//relativo a primeira entrada || caso tenha que trocar por um ja terminado            		
-            			historico.add(new Execucao(this.processoCorrente,tempoInicial,this.tempoCorrente));            			
+            			historico.add(new Execucao(this.processoCorrente,tempoInicial,this.tempoCorrente-this.tempoTrocaContexto));            			
             		}            		
             		tempoInicial = this.tempoCorrente;
             		this.processoCorrente = proximoProcesso;
@@ -47,7 +47,8 @@ public class ShortestJobFirstPreemptive extends StrategyEscalonador{
             			this.processosEstadoPronto.remove(this.processoCorrente);            			
             		}
             	}
-            }          	
+            }     	
+            System.out.println(this.tempoCorrente);
             this.tempoCorrente = this.tempoCorrente + 1;
         }
         escalonamento = historico;
