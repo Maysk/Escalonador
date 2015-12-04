@@ -46,10 +46,19 @@ public class Priority extends StrategyEscalonador{
 	
 	private Processo pollProcessoDisponivelComMaiorPrioridade(){
 		Processo processoEscolhido = processosEstadoPronto.first();
+		boolean condicao;
 		for(Processo p : processosEstadoPronto){
-			if(p.getPrioridade() > processoEscolhido.getPrioridade() && p.getTempoChegada() < tempoCorrente){
+			if(p.getPrioridade() > processoEscolhido.getPrioridade()){
+				condicao = p.getTempoChegada() <= tempoCorrente || ((processoEscolhido.getTempoChegada() > tempoCorrente) && (p.getTempoChegada() < processoEscolhido.getTempoChegada()));
+			}
+			else {
+				condicao = p.getTempoChegada() < processoEscolhido.getTempoChegada();
+			}	
+ 
+			if(condicao){
 				processoEscolhido = p;
 			}
+		
 		}
 		processosEstadoPronto.remove(processoEscolhido);
 		return processoEscolhido;
