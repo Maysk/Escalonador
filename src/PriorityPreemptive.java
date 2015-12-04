@@ -88,14 +88,11 @@ public class PriorityPreemptive extends StrategyEscalonador{
 		boolean condicao;
 		for(Processo p : processosEstadoPronto){
 			if(p.getPrioridade() > processoEscolhido.getPrioridade()){
-				condicao = p.getTempoChegada() <= tempoCorrente || ((p.getTempoChegada() > tempoCorrente && processoEscolhido.getTempoChegada()>tempoCorrente) && (p.getTempoChegada() < processoEscolhido.getTempoChegada()));
+				condicao = p.getTempoChegada() <= tempoCorrente || ((processoEscolhido.getTempoChegada() > tempoCorrente) && (p.getTempoChegada() < processoEscolhido.getTempoChegada()));
 			}
-			else if(p.getPrioridade() == processoEscolhido.getPrioridade()){
+			else {
 				condicao = p.getTempoChegada() < processoEscolhido.getTempoChegada();
 			}	
-			else{
-				condicao = p.getTempoChegada() < processoEscolhido.getTempoChegada() && processoEscolhido.getTempoChegada() > tempoCorrente;
-			}
  
 			if(condicao){
 				processoEscolhido = p;
