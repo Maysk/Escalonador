@@ -1,0 +1,80 @@
+FCFS 
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 60.0
+Media Throughput dos processos: 0.04
+Media Turnaround dos processos: 60.25
+Media Espera dos processos: 45.25
+Media Resposta dos processos: 45.25
+Media Troca de Contextos dos processos: 1.0
+Numero de Processos executados: 4
+
+RR 3
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 22.22222222222222
+Media Throughput dos processos: 0.014814814814814815
+Media Turnaround dos processos: 230.25
+Media Espera dos processos: 215.25
+Media Resposta dos processos: 24.75
+Media Troca de Contextos dos processos: 5.25
+Numero de Processos executados: 4
+
+RR 7
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 35.294117647058826
+Media Throughput dos processos: 0.023529411764705882
+Media Turnaround dos processos: 143.25
+Media Espera dos processos: 128.25
+Media Resposta dos processos: 30.75
+Media Troca de Contextos dos processos: 2.75
+Numero de Processos executados: 4
+
+RR 20
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 60.0
+Media Throughput dos processos: 0.04
+Media Turnaround dos processos: 60.25
+Media Espera dos processos: 45.25
+Media Resposta dos processos: 45.25
+Media Troca de Contextos dos processos: 1.0
+Numero de Processos executados: 4
+
+SJF 
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 60.0
+Media Throughput dos processos: 0.04
+Media Turnaround dos processos: 59.0
+Media Espera dos processos: 44.0
+Media Resposta dos processos: 44.0
+Media Troca de Contextos dos processos: 1.0
+Numero de Processos executados: 4
+
+SJFP 
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 54.54545454545455
+Media Throughput dos processos: 0.03636363636363636
+Media Turnaround dos processos: 64.0
+Media Espera dos processos: 49.0
+Media Resposta dos processos: 49.0
+Media Troca de Contextos dos processos: 1.25
+Numero de Processos executados: 4
+
+PRIORITY 
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 60.0
+Media Throughput dos processos: 0.04
+Media Turnaround dos processos: 61.5
+Media Espera dos processos: 46.5
+Media Resposta dos processos: 46.5
+Media Troca de Contextos dos processos: 1.0
+Numero de Processos executados: 4
+
+PRIORITYP 
+Tempo total de processamento: 60.0
+Percentual de utilizacao da CPU(%): 50.0
+Media Throughput dos processos: 0.03333333333333333
+Media Turnaround dos processos: 79.0
+Media Espera dos processos: 64.0
+Media Resposta dos processos: 64.0
+Media Troca de Contextos dos processos: 1.5
+Numero de Processos executados: 4
+

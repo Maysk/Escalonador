@@ -59,7 +59,7 @@ public abstract class StrategyEscalonador {
             saida.newLine(); 
             saida.write("Tempo total de processamento: " + tempototal); 
             saida.newLine(); 
-            saida.write("Percentual	de utilização da CPU(%): " + usoCPU); 
+            saida.write("Percentual de utilização da CPU(%): " + usoCPU); 
             saida.newLine(); 
             saida.write("Média Throughput dos processos: " + mediaThroughput); 
             saida.newLine(); 
@@ -71,7 +71,7 @@ public abstract class StrategyEscalonador {
             saida.newLine(); 
             saida.write("Média Troca de Contextos dos processos: " + mediaTrocaContexto); 
             saida.newLine(); 
-            saida.write("Numero	de Processos executados: " + processos.size()); 
+            saida.write("Numero de Processos executados: " + processos.size()); 
             saida.newLine(); 
             saida.newLine(); 
             saida.flush();
